@@ -1,5 +1,8 @@
 package cs420.project.pkg2;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -7,6 +10,7 @@ import java.util.Random;
  * @author Josh
  */
 public class Nqueen {
+
     private int n;
     private int[] state;
     private int value;
@@ -16,10 +20,27 @@ public class Nqueen {
         this.value = calcValue();
     }
     
+    public Nqueen(int size){
+        this.state = new int[size];
+        this.n = size;
+        
+        ArrayList test = new ArrayList();
+        for(int i=0; i<n; i++){
+            test.add(i);
+        }
+        Collections.shuffle(test, Cs420Project2.rand);
+        for(int j=0; j<test.size(); j++){
+                state[j] = (int)test.get(j);
+            }
+        this.value = calcValue();
+    }
+    
     public Nqueen randomChild(){
-        Random rand = new Random();
-        int col = rand.nextInt(n);
-        int row = rand.nextInt(n);
+        int col = Cs420Project2.rand.nextInt(n);
+        int row = Cs420Project2.rand.nextInt(n);
+        while(row==state[col]){
+            row = Cs420Project2.rand.nextInt(n);
+        }
         int [] newState = state.clone();
         newState[col] = row;
 
@@ -42,8 +63,10 @@ public class Nqueen {
                 if(i==j) continue;
                 if(state[i] == state[j]){
                     val++;
+                    break;
                 }else if(Math.abs(j-i) == Math.abs(state[j] - state[i])){
                     val++;
+                    break;
                 }
             }
         }
@@ -62,19 +85,22 @@ public class Nqueen {
     }
     
     public void mutate(){
-        Random rand = new Random();
-        int pos = rand.nextInt(n);
-        int val = rand.nextInt(n);
-        this.state[pos] = val;
+        int pos = Cs420Project2.rand.nextInt(n);
+        int val = Cs420Project2.rand.nextInt(n);
+        while(state[pos]==val){
+            val = Cs420Project2.rand.nextInt(n);
+        }
+        state[pos]=val;
     }
     
     public Nqueen reproduce(Nqueen mate){
-        Random rand = new Random();
-        int roll = rand.nextInt(n);
+
+        int roll = Cs420Project2.rand.nextInt(n);
+        
         int[] mateState = mate.getState();
         int[] child = new int[n];
         for(int i=0; i<n; i++){
-            if(i<roll){
+            if( i < roll ){
                 child[i]=state[i];
             }else{
                 child[i]=mateState[i];

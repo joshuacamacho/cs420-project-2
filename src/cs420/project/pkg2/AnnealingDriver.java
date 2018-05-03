@@ -4,34 +4,42 @@ package cs420.project.pkg2;
  *
  * @author Josh
  */
-public class AnnealingDriver {
-    public static Nqueen execute(Nqueen n){
+public class AnnealingDriver extends Timing {
+    public Nqueen execute(Nqueen n){
         Nqueen nextState;
         Nqueen currentState = n;
+        int count = 0;
+        startTime();
         while (currentState.value() != 0) {
-            double temperature;
             double delta;
             double probability;
             double rand;
-
             
-            for (int time = 0; time<1000; time++) {
+            
+            for (double time = 1.0; time<1000.0; time++) {
                 nextState = currentState.randomChild();
                 delta = currentState.value() - nextState.value();
+//                System.out.println("delta is" + delta);
                 probability = Math.exp(delta / schedule(time));
+//                System.out.println("Prob "+probability);
                 rand = Math.random();
-
+                
                 if (delta > 0) {
                     currentState = nextState;
                 } else if (rand <= probability) {
                     currentState = nextState;
                 }
+                count++;
             }
         }
+//        System.out.println("Cost - " + count);
+        totalCost+=count;
+        endTime();
+        size++;
         return currentState;
     }
 
-    private static double schedule(int x) {
-        return 1000 -
+    private static double schedule(double x) {
+        return 1.0/x;
     }
 }
