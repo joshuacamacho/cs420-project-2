@@ -24,13 +24,13 @@ public class Nqueen {
         this.state = new int[size];
         this.n = size;
         
-        ArrayList test = new ArrayList();
+        ArrayList<Integer> test = new ArrayList<Integer>();
         for(int i=0; i<n; i++){
             test.add(i);
         }
         Collections.shuffle(test, Cs420Project2.rand);
         for(int j=0; j<test.size(); j++){
-                state[j] = (int)test.get(j);
+                state[j] = test.get(j);
             }
         this.value = calcValue();
     }
