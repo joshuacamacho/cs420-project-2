@@ -14,6 +14,7 @@ public class Nqueen {
     private int n;
     private int[] state;
     private int value;
+    public int staleCount=0;
     public Nqueen (int[] state){
         this.state = state;
         this.n = state.length;

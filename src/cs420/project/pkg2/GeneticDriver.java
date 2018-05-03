@@ -16,8 +16,8 @@ public class GeneticDriver extends Timing{
         startTime();
         Nqueen current = population.peek();
         PriorityQueue<Nqueen> pop = population;
-        int max = 200000;
-        while(current.value()!=0 && max >0){
+        int max = 500000;
+        while(current.value()!=0 & max > 0){
                 max--;
                 totalCost++;
                 Nqueen x = pop.poll();
@@ -28,7 +28,7 @@ public class GeneticDriver extends Timing{
                     current = child;
                     break;
                 }
-                if(Cs420Project2.rand.nextInt(100)<25){
+                if(Cs420Project2.rand.nextInt(100)<20){
                     child.mutate();
                 }
                 

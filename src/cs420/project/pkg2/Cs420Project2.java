@@ -20,20 +20,27 @@ public class Cs420Project2 {
         
         
         PriorityQueue<Nqueen> population = new PriorityQueue<Nqueen>(10,(Nqueen a, Nqueen b) 
-                ->{return a.value() - b.value();}) ;
+                ->{
+                a.staleCount++;
+                if(a.value() == b.value()){
+                    
+                    return a.staleCount - b.staleCount;
+                }
+                return a.value() - b.value();
+            }) ;
         
         
         
         AnnealingDriver d1 = new AnnealingDriver();
         GeneticDriver d2 = new GeneticDriver();
         
-        for(int i=0; i<100; i++){
+        for(int i=0; i<400; i++){
 //            Nqueen test = new Nqueen(5);
 //            test.print();
 //            System.out.println(test.value());
             System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");  
             System.out.println("Working on Genetic Algorithm");
-            System.out.println((float)i/100*100+"% Complete");
+            System.out.println((float)i/400*100+"% Complete");
             // d1.execute(new Nqueen(n));
             population.clear();
             for(int j=0; j<500; j++){
@@ -48,7 +55,7 @@ public class Cs420Project2 {
         
         
         System.out.println("ave Genetic "+d2.getAveCost());
-        System.out.println("successRate "+d2.successRate());
+        System.out.println("successRate "+d2.successRate()+"%");
         System.out.println("successCount "+d2.successCount());
 
     }

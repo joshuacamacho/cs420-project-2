@@ -38,7 +38,7 @@ public abstract class Timing {
     }
     
     public double successRate(){
-        return (double)successCount/(double)size;
+        return ((double)successCount/(double)size)*100;
     }
     
     public double successCount(){
