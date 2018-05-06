@@ -9,7 +9,7 @@ import java.util.Random;
  *
  * @author Josh
  */
-public class Nqueen {
+public class Nqueen{
 
     private int n;
     private int[] state;

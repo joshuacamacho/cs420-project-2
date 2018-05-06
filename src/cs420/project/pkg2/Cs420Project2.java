@@ -33,15 +33,21 @@ public class Cs420Project2 {
         
         AnnealingDriver d1 = new AnnealingDriver();
         GeneticDriver d2 = new GeneticDriver();
+        int testCount =1000;
         
-        for(int i=0; i<400; i++){
+        System.out.println("Testing Simulated Annealing");
+        for(int i=0; i<testCount; i++){
+            d1.execute(new Nqueen(n));
+        }
+        
+        for(int i=0; i<testCount; i++){
 //            Nqueen test = new Nqueen(5);
 //            test.print();
 //            System.out.println(test.value());
             System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");  
             System.out.println("Working on Genetic Algorithm");
-            System.out.println((float)i/400*100+"% Complete");
-            // d1.execute(new Nqueen(n));
+            System.out.println((float)i/testCount*100+"% Complete");
+//             
             population.clear();
             for(int j=0; j<500; j++){
 
@@ -51,7 +57,7 @@ public class Cs420Project2 {
             d2.execute(population);
         }
         
-//        System.out.println("average cost = "+d1.getAveCost());
+        System.out.println("average Annealing cost = "+d1.getAveCost());
         
         
         System.out.println("ave Genetic "+d2.getAveCost());

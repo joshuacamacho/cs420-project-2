@@ -21,7 +21,7 @@ public class AnnealingDriver extends Timing {
                 delta = currentState.value() - nextState.value();
 //                System.out.println("delta is" + delta);
                 probability = Math.exp(delta / schedule(time));
-//                System.out.println("Prob "+probability);
+//                System.out.println(time+","+probability);
                 rand = Math.random();
                 
                 if (delta > 0) {
